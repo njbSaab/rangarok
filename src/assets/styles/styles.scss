@@ -2,31 +2,32 @@
 @import "../styles/mixins.scss";
 
 .section {
+  //!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ анимация по классу hidden
   &.hidden {
     .editions {
       &-item {
-        transition: transform 0s;
+        transform: translate 0;
         transform: translateX(-2000px);
       }
     }
-
     h2 {
       transition: opacity 0s;
       opacity: 0;
     }
-
     .dual,
     .explore-info {
       transition: column-gap 0s;
       column-gap: 250%;
     }
-
     .video {
-      transition: transform 0s;
+      transform: transform 0s;
       transform: scale(0);
     }
-
-    .news,
+    .news {
+      opacity: 0;
+      transition: transform 0s;
+      transform: translateY(-200%);
+    }
     .faq-item {
       transition: transform 0s;
       transform: translateX(-200%);
@@ -38,60 +39,38 @@
     position: relative;
     max-width: 1920px;
     margin: 0 auto;
-    min-height: 700px;
-
-    &:after,
-    &:before {
-      height: 764px;
-      width: 1363px;
-      content: "";
-      display: block;
-      position: absolute;
-      top: 0;
-      right: 0;
-      z-index: -1;
-    }
-
-    &:after {
-      background: url(../images/snow.gif) no-repeat center/cover;
-      opacity: 0.1;
-    }
-
-    &:before {
-      background: url(../images/bg.png) no-repeat center/cover;
-    }
+    min-height: 70vh;
   }
-
-  &-dual {
-    margin-top: 54px;
+  &:after,
+  &:before {
+    height: 764px;
+    width: 1363px;
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: -1;
   }
-
-  &-about {
-    margin-top: 90px;
+  &:after {
+    background: url(../images/snow.gif) no-repeat center/cover;
+    opacity: 0.1;
   }
-
-  &-explore {
-    margin-top: 80px;
-  }
-
-  &-news,
-  &-faq {
-    margin-top: 100px;
+  &:before {
+    background: url(../images/bg.png) no-repeat center/cover;
   }
 }
+//! ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~animation
 
+//! _______________________________________________________________header
 .header {
   align-items: center;
-
   &-menu {
     align-items: center;
-
     &__button {
       width: 25px;
       height: 16px;
       cursor: pointer;
-      position: relative;
-      z-index: 1;
       transition: width 0.25s;
 
       span {
@@ -100,32 +79,33 @@
         background: $white;
         position: relative;
         display: block;
+      }
 
-        &::after,
-        &::before {
-          display: block;
-          content: "";
-          width: 12px;
-          height: 2px;
-          background: $white;
-          position: absolute;
-          transition: width 0.25s;
-        }
+      &::after,
+      &::before {
+        display: block;
+        content: "";
+        width: 12px;
+        height: 2px;
+        background: $white;
+        position: absolute;
+        transition: width 0.25s;
+      }
 
-        &:after {
-          top: 5px;
-        }
+      &::after {
+        top: 72px;
+        width: 12px;
+      }
 
-        &::before {
-          width: 25px;
-          top: 10px;
-        }
+      &::before {
+        width: 25px;
+        top: 79px;
       }
     }
-
     &__list {
       margin-left: 50px;
       z-index: -1;
+      transition: all 0.5s ease;
 
       ul {
         column-gap: 24px;
@@ -133,41 +113,40 @@
         font-size: 14px;
         line-height: 27px;
         text-transform: uppercase;
-        transform: translateX(-200px);
+        transform: translate(-200px);
         opacity: 0;
       }
     }
-
+    //?_____________________ menu
     &__link {
       position: relative;
-      color: rgba(255, 255, 255, 0.5);
+      color: $sea;
       transition: color 0.25s;
 
       &:hover {
-        color: $violet;
+        color: $dark;
       }
 
       &.lang {
         color: $white;
         font-weight: 700;
         cursor: pointer;
-
+        transition: all 0.25s ease;
         &:hover {
           .header-menu__languages {
             display: block;
           }
         }
-
         svg {
           width: 12px;
           height: 12px;
           fill: $white;
           transform: rotate(180deg);
-          margin-left: 9px;
+          margin-right: 9px;
         }
       }
     }
-
+    //?_____________________ menu lang
     &__languages {
       padding: 10px 15px;
       border-radius: 6px;
@@ -189,24 +168,21 @@
       }
     }
   }
-
+  //?_____________________ burger
   &.opened {
     .header {
       &-menu {
         &__button {
           span {
             width: 12px;
-
-            &::after {
-              width: 25px;
-            }
-
-            &::before {
-              width: 12px;
-            }
+          }
+          &::after {
+            width: 25px;
+          }
+          &::before {
+            width: 12px;
           }
         }
-
         &__list {
           z-index: 1;
 
@@ -219,21 +195,29 @@
       }
     }
   }
-
+  //?_____________________ timer
   &-timer {
     margin-left: auto;
     column-gap: 19px;
 
+    &__item {
+      text-align: center;
+    }
+    &__release {
+      color: $sea;
+      font-size: 22px;
+      span {
+        font-size: 18px;
+      }
+    }
     span {
       font-weight: 400;
-      line-height: 19px;
+      line-height: 18px;
       color: $grey;
     }
-
     &__values {
       column-gap: 10px;
     }
-
     &__item {
       color: $sea;
 
@@ -244,7 +228,6 @@
         min-width: 55px;
         text-align: center;
       }
-
       &-info {
         text-align: center;
         font-weight: 400;
@@ -252,12 +235,19 @@
     }
   }
 }
+.mounth {
+  font-size: 55px;
+}
+.seconds {
+  font-size: 18px;
+  text-align: left;
+}
 
+//?_____________________ descrt
 .description {
   margin-top: 7%;
   max-width: 540px;
   animation: move 1s ease-in-out;
-
   &-title {
     h1 {
       font-weight: 600;
@@ -265,7 +255,6 @@
       line-height: 100px;
     }
   }
-
   &-subtitle {
     font-weight: 400;
     font-size: 18px;
@@ -273,15 +262,20 @@
     color: $sea;
     margin-top: 26px;
   }
-
   &-button {
     @include button;
     @include hoverViolet;
-    margin-top: 36px;
+    margin-top: 30px;
   }
 }
+//!_________________________________header
 
+//!_______________________________________________________________edition
 .editions {
+  h2 {
+    @include title;
+  }
+
   &-list {
     margin-top: 32px;
     display: grid;
@@ -289,7 +283,6 @@
     column-gap: 16px;
     justify-content: center;
   }
-
   &-item {
     background: linear-gradient(180deg, #141615 0%, #1c2023 100%);
     border-radius: 6px;
@@ -298,13 +291,11 @@
     transform: translateX(0);
 
     &:nth-child(2) {
-      transition-delay: 0.25s;
+      transition-delay: 0.25s; //! анимация карточек
     }
-
     &:last-child {
-      transition-delay: 0.5s;
+      transition-delay: 0.5s; //! анимация карточек
     }
-
     &__img {
       border-radius: 6px;
       overflow: hidden;
@@ -312,23 +303,20 @@
       height: 172px;
       @include bg;
     }
-
     &__title {
       margin-top: 20px;
       font-weight: 700;
       line-height: 19px;
       text-align: center;
     }
-
-    &__subtitle {
+    &__suptitle {
       color: $sea;
       line-height: 19px;
       font-weight: 500;
       text-align: center;
       margin: 10px 0 32px 0;
     }
-
-    &__description {
+    &__desc {
       color: $grey;
       font-weight: 400;
       font-size: 14px;
@@ -337,7 +325,6 @@
       flex-direction: column;
       row-gap: 12px;
     }
-
     &__price {
       font-weight: 700;
       font-size: 19px;
@@ -346,7 +333,6 @@
       margin: 6px 0 14px 0;
       text-align: right;
     }
-
     &__btn {
       @include button;
       @include hoverViolet;
@@ -357,89 +343,82 @@
     }
   }
 }
+//!_______________________________ edition
 
+//!_______________________________________________________________ dual
+.dual-title {
+  margin-top: 50px;
+  @include title;
+}
+//?_____________________ desc
 .dual {
   column-gap: 5%;
   margin-top: 20px;
   transition: column-gap 0.5s;
-
-  &-description {
+  //?_____________________ desc
+  &-desc {
     max-width: 410px;
 
     p {
       color: $sea;
       font-weight: 400;
-      font-size: 18px;
+      font-size: 16px;
       line-height: 27px;
       margin-bottom: 22px;
+    }
 
-      span {
-        font-weight: 700;
-      }
+    span {
+      font-weight: 700;
     }
 
     &__info {
-      margin-top: 19px;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    &__price {
       font-weight: 700;
       font-size: 30px;
       line-height: 36px;
+      justify-content: space-between;
+      align-items: center;
     }
-
-    &__button {
-      @include button($orange);
+    &__btn {
       @include hoverOrange;
+      @include button($orange);
+      font-size: 15px;
+      line-height: 17px;
       padding: 14px 19px;
-      font-weight: 500;
     }
   }
-
   &-img {
     max-width: 50%;
     position: relative;
 
     img {
       max-width: fit-content;
-      animation: gravitation 1.5s linear infinite alternate;
-    }
-
-    &::before {
-      content: "";
-      display: block;
-      width: 194px;
-      height: 119px;
-      background: rgba(79, 96, 152, 0.8);
-      filter: blur(75px);
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      animation: gravity 1.5s linear infinite alternate;
     }
   }
 }
+//!_______________________________ dual
 
+//!_______________________________________________________________ video
+.title {
+  @include title;
+  padding-top: 50px;
+}
 .video {
   position: relative;
   margin-top: 32px;
   transition: transform 0.5s;
   transform: scale(1);
-
   video {
     width: 100%;
     height: auto;
   }
-
   &-info {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 2;
     text-align: center;
+    z-index: 2;
 
     &.hidden {
       opacity: 0;
@@ -449,24 +428,15 @@
       }
     }
   }
-
   &-title {
-    font-weight: 500;
-    font-size: 50px;
-    color: $white;
-    line-height: 39px;
+    @include title;
+    padding-bottom: 20px;
   }
-
   &-btn {
-    background: $dark;
-    border-radius: 6px;
-    padding: 9px 26px;
-    font-weight: 500;
-    line-height: 16px;
-    color: $white;
+    @include button($dark);
     display: inline-block;
+    margin: 0 auto;
     cursor: pointer;
-    margin: 28px auto 0 auto;
     transition: background 0.25s;
     text-transform: uppercase;
 
@@ -475,35 +445,24 @@
     }
   }
 }
+//!________________________________ video
 
+//!_______________________________________________________________ explorer
 .explore {
   &-items {
     display: flex;
     flex-direction: column;
     row-gap: 100px;
-    margin-top: 32px;
-
-    h3 {
-      text-align: center;
-      font-weight: 500;
-      font-size: 18px;
-      line-height: 21px;
-    }
   }
-
   &-item {
-    &__price {
-      margin-top: 20px;
-      font-weight: 700;
-      font-size: 20px;
-      line-height: 24px;
-      color: $white;
-      text-align: center;
-    }
-  }
-
-  &-switch {
     margin-top: 20px;
+    font-size: 20px;
+    font-weight: 700;
+    color: $white;
+    text-align: center;
+  }
+  &-switch {
+    margin: 20px 0 85px;
     column-gap: 15px;
 
     &__checkbox {
@@ -514,9 +473,11 @@
       position: relative;
 
       input {
-        width: 100%;
-        height: 100%;
         position: absolute;
+        width: 49px;
+        height: 27px;
+        right: 0;
+        left: 0;
         opacity: 0;
         cursor: pointer;
         z-index: 2;
@@ -524,6 +485,7 @@
         &:checked {
           & + span {
             transform: translateX(28px);
+            transition: transform 0.5s;
           }
         }
       }
@@ -537,14 +499,13 @@
         top: 4px;
         left: 4px;
         transform: translate(0);
-        transition: transform 0.25s;
+        transition: transform 0.25px;
       }
     }
-
     &__title {
-      font-weight: 400;
       font-size: 14px;
-      line-height: 17px;
+      line-height: 16px;
+      font-weight: 400;
       color: $dark;
 
       &.active {
@@ -552,37 +513,37 @@
       }
     }
   }
-
   &-info {
-    margin-top: 96px;
     column-gap: 5%;
     transition: column-gap 0.5s;
-
+    .start {
+      text-align: start;
+    }
+    .start-btn {
+      margin-right: auto;
+    }
     &.reverse {
       flex-direction: row-reverse;
-
-      .explore {
-        &-img {
-          justify-content: start;
-        }
-
-        &-description {
-          text-align: right;
-        }
-
-        &-button {
-          margin-left: auto;
+      .end {
+        text-align: end;
+        .end-btn {
+          display: inline-block;
         }
       }
     }
   }
-
+  &-btn {
+    @include button;
+    padding: 10px 20px;
+    margin-left: 0 auto;
+    margin-top: 10px;
+    transition: all 0.5s ease;
+    @include hoverViolet;
+  }
   &-img {
-    width: 50%;
     text-align: center;
     display: flex;
     align-items: center;
-    justify-content: end;
 
     &__wrap {
       width: 300px;
@@ -614,132 +575,130 @@
     }
   }
 
-  &-description {
+  &-discr {
     min-width: max-content;
-    width: 50%;
+    font-size: 15px;
+    line-height: 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    height: 300px;
+    transition: transform 0.5s ease;
 
     ul {
-      flex-direction: column;
-      font-weight: 400;
-      font-size: 15px;
-      line-height: 36px;
       display: none;
+      transition: transform 0.5s;
 
       &.active {
-        display: flex;
+        display: block;
+        transition: transform 0.5s;
       }
     }
   }
-
-  &-button {
-    @include button($orange);
-    @include hoverOrange;
-    margin-top: 28px;
+  &-ls {
+    flex: 1 1 auto;
   }
 }
 
+//!_________________________________ dual
+
+//!_______________________________________________________________ news
+.news-title {
+  padding-top: 80px;
+  margin-bottom: 20px;
+}
 .news {
-  margin-top: 32px;
   transition: transform 0.5s;
   transform: translate(0);
-
   &-item {
-    background: linear-gradient(177.87deg, #30373f 41.63%, #141615 185.57%);
-    border-radius: 6px;
-    padding: 20px;
-
     &__info {
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    &__subtitle {
-      font-weight: 600;
-      font-size: 10px;
-      line-height: 12px;
-      text-transform: uppercase;
-      color: $violet;
-    }
-
-    &__date {
-      font-weight: 400;
-      font-size: 10px;
-      line-height: 17px;
-      color: $grey;
-    }
-
-    &__title {
-      font-weight: 600;
-      font-size: 19px;
-      line-height: 23px;
-      text-transform: uppercase;
-      color: $white;
-      margin: 7px 0 16px 0;
-    }
-
-    &__description {
-      column-gap: 24px;
-      height: 248px;
-      align-items: flex-start;
-    }
-
-    &__img {
-      min-width: 278px;
-      height: 100%;
-      @include bg;
-    }
-
-    &__text {
       flex-direction: column;
-      height: 100%;
-
-      p {
-        color: #d9d9d9;
+      width: 470px;
+      height: 270px;
+      padding: 12px;
+      background: linear-gradient(180deg, #141615 0%, #1c2038 100%);
+      border-radius: 12px;
+    }
+    &__box {
+      display: flex;
+      justify-content: space-between;
+      &-subtitle {
+        font-size: 10px;
+        color: $violet;
+        font-weight: 600;
+      }
+      &-data {
+        font-size: 10px;
+        color: $dark;
         font-weight: 400;
-        font-size: 12px;
-        line-height: 17px;
+      }
+    }
+    &__title {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 18px;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+  }
+  .content {
+    display: flex;
+    column-gap: 25px;
+    height: 175px;
+
+    &-img {
+      width: 50%;
+      @include bg;
+      border-radius: 12px;
+      img {
+        width: 270px;
+        height: 248px;
       }
     }
 
-    &__button {
-      background: $grey;
-      border-radius: 6px;
-      font-weight: 500;
-      font-size: 13px;
-      line-height: 15px;
-      text-transform: uppercase;
-      color: $white;
-      margin-top: 10px;
-      padding: 8px 30px;
-      display: flex;
-      width: max-content;
+    &-text__box {
+      width: 50%;
+    }
+    &-text {
+      font-size: 12px;
+      line-height: 14px;
+      font-weight: 400;
+      color: #d9d9d9;
+      margin-bottom: 10px;
+      height: 137px;
+    }
+    &-btn {
+      @include button(#8c96a0);
+      @include hoverViolet;
+      padding: 5px 15px;
+      display: block;
       margin-left: auto;
-      margin-top: auto;
-      transition: background 0.25s;
-
-      &:hover {
-        background: $dark;
-      }
+      transition: all 0.5s ease;
+      font-size: 12px;
     }
   }
 }
+//!_____________________________________ news
+
+//!_______________________________________________________________ faq
 
 .faq {
+  margin-top: 100px;
+  &-title {
+    @include title;
+  }
   &-items {
     flex-direction: column;
     row-gap: 32px;
   }
-
   &-item {
     transition: transform 0.4s;
     transform: translate(0);
-
     &:nth-child(2) {
-      transition-delay: 0.25s;
+      transition-delay: 0.25s; //! анимация карточек
     }
-
     &:last-child {
-      transition-delay: 0.5s;
+      transition-delay: 0.5s; //! анимация карточек
     }
 
     &__header {
@@ -748,13 +707,17 @@
       font-weight: 600;
       font-size: 17px;
       line-height: 20px;
-      color: $white;
       cursor: pointer;
       border-bottom: 2px solid $violet;
       padding-bottom: 8px;
 
       span {
-        background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #8c96a0;
+        background: linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.2) 0%,
+            rgba(0, 0, 0, 0.2)
+          ),
+          #8c96a0;
         border-radius: 6px;
         width: 30px;
         height: 30px;
@@ -770,12 +733,11 @@
     &__content {
       height: 0;
       opacity: 0;
-      transition: height 0.25s, opacity 0.25s;
-
+      transition: heigth 0.25s, opacity 0.25s;
       p {
+        font-size: 14px;
         padding-top: 13px;
         font-weight: 400;
-        font-size: 14px;
         line-height: 17px;
 
         span {
@@ -783,85 +745,75 @@
         }
       }
     }
-
     &.opened {
       span {
         &::before {
           transform: rotate(45deg);
         }
       }
-
       .faq-item__content {
         opacity: 1;
       }
     }
   }
 }
+//!_____________________________________ faq
 
+//!_______________________________________________________________ footer
 .footer {
-  padding-top: 156px;
+  margin-top: 150px;
   position: relative;
   padding-bottom: 20px;
-
   &::before {
-    content: " ";
-    display: block;
+    content: "";
     width: 786px;
-    height: 439px;
+    height: 400px;
     position: absolute;
     top: 0;
     right: 20%;
     z-index: -1;
     background: url(../images/footer.png) no-repeat center/cover;
   }
-
+  &-box {
+    display: flex;
+    flex-direction: column;
+  }
   &-top {
     justify-content: space-between;
   }
-
   &-menu {
     column-gap: 22px;
     font-weight: 400;
     line-height: 27px;
     text-transform: uppercase;
     transition: color 0.25s ease;
-
-    a {
-      color: rgba(255, 255, 255, 0.5);
-
-      &:hover {
-        color: $violet;
-      }
-    }
   }
-
   &-lang {
     font-weight: 700;
     font-size: 14px;
     line-height: 27px;
     cursor: pointer;
-
+    &:hover {
+      .footer-lang__content {
+        visibility: visible;
+      }
+    }
     span {
       text-transform: uppercase;
       color: $grey;
       margin-right: 5px;
     }
 
-    &__current {
+    &__curr {
       color: $white;
       text-transform: uppercase;
     }
-
     &__list {
       position: relative;
-
-      &:hover {
-        .footer-lang__content {
-          visibility: visible;
-        }
+      &.footer-lang__content {
+        visibility: visible;
       }
     }
-
     &__content {
       background: $dark;
       border-radius: 6px;
@@ -881,74 +833,108 @@
       }
     }
   }
-
   &-info {
+    flex: 1 1 auto;
     font-weight: 400;
     font-size: 14px;
-    line-height: 18px;
+    line-height: 19px;
     text-align: center;
     color: $grey;
-    margin: 50px auto 38px auto;
+    margin: 50px auto 50px auto;
     max-width: 700px;
   }
-
   &-icon {
     text-align: center;
   }
-
   &-year {
-    margin: 20px auto 13px auto;
+    margin: 20px auto 20px auto;
   }
-
   &-year,
-  &-rights {
+  &-right {
     font-weight: 400;
     line-height: 19px;
     color: $grey;
     text-align: center;
 
-    a {
-      color: $violet;
+    span {
+      color: violet;
       text-decoration: underline;
     }
   }
+  &-right {
+    margin-top: 50px;
+  }
 }
+//!______________________________________________________________footer
 
+//!______________________________________________________________ swiper
 .swiper {
-  &-button {
+  padding-bottom: 100px;
+  &-pagination {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 32px;
-    height: 32px;
-    background: #8c96a0;
-    border-radius: 6px;
-    z-index: 9;
+    right: 50%;
+    background-color: #fff;
+    width: 10px;
+    height: 10px;
+    &-bullet {
+      background-color: #fff;
+      width: 10px;
+      height: 10px;
+    }
+  }
+  &-slide {
+    margin-right: 14px;
+  }
+  &-button {
+    height: 30px;
+    width: 30px;
     cursor: pointer;
-    transition: baclground 0.25s;
-
+    position: absolute;
+    bottom: 20px;
+    background: #8c96a0;
+    transition: all 0.5s ease;
+    z-index: 9;
+    border-radius: 6px;
     &:hover {
       background: $violet;
     }
-
-    svg {
-      fill: #fff;
+    img {
+      @include bg;
+      width: 35%;
     }
-
-    &-prev {
-      left: 10%;
-    }
-
     &-next {
-      right: 10%;
-
-      svg {
-        transform: scale(-1, 1);
-      }
+      right: 47%;
+    }
+    &-prev {
+      left: 47%;
     }
   }
-}
+  // &-button{
+  //   position: absolute;
+  //   top: 50%;
+  //   transform: translateY(-50%);
+  //   cursor: pointer;
+  //   height: 32px;
+  //   width: 32px;
 
+  //   svg {
+  //     fill: #ffff;
+  //   }
+  //   &-prev {
+  //     left: 10%;
+  //   }
+  //   &-next{
+  //     right: 10%;
+
+  //     svg{
+  //       transform: scale(-1, 1);
+  //     }
+  //   }
+  // }
+}
+//!______________________________________________________________ swiper
+
+//!______________________________________________________________ modal
 .modal {
   position: fixed;
   top: 50%;
@@ -957,15 +943,13 @@
   z-index: 999;
   opacity: 0;
   visibility: hidden;
-
   &.opened {
-    transition: all 0.25s;
+    transform: all .5s;
     visibility: visible;
     opacity: 1;
   }
-
   &-wrapper {
-    background: linear-gradient(180deg, #30373f 0%, #000000 99.82%);
+    background-image: linear-gradient(180deg, #30373f 0%, #000000 99.82%);
     border-radius: 12px;
     padding: 32px;
     position: relative;
@@ -992,37 +976,43 @@
     color: #d9d9d9;
     cursor: pointer;
   }
-
   &-title {
     font-weight: 700;
     font-size: 18px;
     line-height: 21px;
     text-align: center;
     color: $violet;
+    margin-bottom: 10px;
   }
-
+  &-sub-title {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 18px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
   &-version {
     font-weight: 500;
     font-size: 15px;
-    line-height: 25px;
+    line-height: 26px;
     text-align: center;
     color: $white;
     text-transform: uppercase;
     margin-top: 5px;
   }
 
-  &-description {
-    font-weight: 400;
-    font-size: 10px;
-    line-height: 12px;
-    color: #d9d9d9;
+  &-descr {
+    p {
+      font-weight: 400;
+      font-size: 10px;
+      line-height: 12px;
+      color: #d9d9d9;
+    }
   }
-
   &-total {
     font-weight: 500;
     width: 100%;
     justify-content: space-between;
-    font-size: 14px;
     line-height: 17px;
     color: $white;
 
@@ -1030,7 +1020,6 @@
       font-size: 20px;
     }
   }
-
   &-submit {
     @include button;
     @include hoverViolet;
@@ -1038,9 +1027,8 @@
     justify-content: center;
   }
 }
-
 .form {
-  margin-top: 17px;
+  margin-top: 12px;
   display: flex;
   flex-wrap: wrap;
   row-gap: 16px;
@@ -1053,7 +1041,6 @@
     &.full {
       width: 100%;
     }
-
     label {
       display: block;
       font-weight: 400;
@@ -1076,7 +1063,6 @@
       width: 100%;
     }
   }
-
   &-checkbox {
     position: relative;
     column-gap: 12px;
@@ -1095,33 +1081,33 @@
       line-height: 12px;
       text-transform: uppercase;
       color: $white;
-
-      .red {
-        color: #ff4136;
-      }
     }
-
+    .red {
+      color: #ff4136;
+      font-weight: 800;
+      text-decoration: underline;
+    }
     input {
-      opacity: 0;
       position: absolute;
       top: 0;
-      left: 0;
+      left: 0px;
       width: 100%;
       height: 100%;
       cursor: pointer;
+      opacity: 0;
 
       &:checked {
         & + .check {
+          padding-top: 5px;
           &::before {
-            content: "✓";
+            content: "√";
           }
         }
       }
     }
   }
 }
-
-.overlay {
+.overlay{
   position: fixed;
   top: 50%;
   left: 50%;
@@ -1133,31 +1119,33 @@
   width: 100%;
   height: 100%;
 
-  &.opened {
+  &.opened{
     visibility: visible;
     opacity: 1;
     z-index: 998;
   }
 }
+//!_______________________________ modal
 
-@keyframes gravitation {
-  0% {
-    transform: translateY(-15px);
-  }
-
-  100% {
-    transform: translateY(0px);
-  }
-}
-
+//!_______________________________ animation
+//? header
 @keyframes move {
   0% {
     opacity: 0;
     transform: translateX(-400px);
   }
-
   100% {
     opacity: 1;
-    transform: translateX(0px);
+    transform: translateX(0);
+  }
+}
+
+//? dual
+@keyframes gravity {
+  0% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }
